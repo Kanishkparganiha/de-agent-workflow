@@ -1,0 +1,43 @@
+pipeline:
+  name: site_delivery_rate_daily
+  version: "1.0.0"
+  owner: utr-data-eng@amazon.com
+  schedule: "0 6 * * *"
+  sla_minutes: 30
+
+source:
+  type: redshift
+  location: site_metrics
+  format: parquet
+  partition_key: metric_date
+
+transforms:
+  - type: filter
+    config:
+      column: metric_date
+      operator: ">="
+      value: "CURRENT_DATE - INTERVAL '7 days'"
+  - type: aggregate
+    config:
+      group_by: [site_id, metric_date]
+      metrics:
+        - name: avg_delivery_rate
+          function: AVG
+          column: delivery_rate
+        - name: total_packages_delivered
+          function: SUM
+          column: packages_delivered
+        - name: total_packages_attempted
+          function: SUM
+          column: packages_attempted
+
+target:
+  type: redshift
+  location: site_delivery_rate_summary
+  write_mode: upsert
+  partition_by: [metric_date]
+
+data_quality:
+  not_null_columns: [site_id, metric_date, avg_delivery_rate]
+  row_count_min: 1
+  freshness_check: true

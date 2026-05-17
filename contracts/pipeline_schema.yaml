@@ -1,0 +1,30 @@
+# DE Copilot — Pipeline Config Contract
+# All pipelines must conform to this schema before deployment
+
+pipeline:
+  name: string          # required, snake_case
+  version: string       # required, semver e.g. "1.0.0"
+  owner: string         # required, team email
+  schedule: string      # cron expression (5 fields)
+  sla_minutes: integer  # max acceptable lag in minutes
+
+source:
+  type: enum[s3, redshift, dynamodb, kinesis]
+  location: string      # s3 path, table name, or stream name
+  format: enum[parquet, csv, json, avro]
+  partition_key: string # optional — column used for partition pruning
+
+transforms:
+  - type: enum[filter, aggregate, join, enrich, deduplicate]
+    config: object      # transform-specific config
+
+target:
+  type: enum[s3, redshift]
+  location: string
+  write_mode: enum[append, overwrite, upsert]
+  partition_by: list[string]
+
+data_quality:
+  not_null_columns: list[string]
+  row_count_min: integer
+  freshness_check: boolean
