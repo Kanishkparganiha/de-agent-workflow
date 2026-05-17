@@ -217,7 +217,7 @@ SQLite DB  [data/de_copilot.db]
 3. Server executes and returns results
 4. Transport: stdio locally, HTTP/SSE for remote
 
-**Why UTR cares:** They want agents to orchestrate pipelines without custom code per system. MCP gives a standard interface so the agent can call any tool — run a query, deploy a config, trigger a job — without being tightly coupled to the implementation.
+The goal is agents that orchestrate pipelines without custom code per system. MCP gives a standard interface so the agent can call any tool — run a query, deploy a config, trigger a job — without being tightly coupled to the implementation.
 
 **Say this:**
 > "MCP is the same protocol Claude, Cursor, and VS Code use to call external tools. I built a DE-focused MCP server that exposes query execution, schema inspection, and pipeline validation as tools. Any MCP client can call them — you could swap the local LLM for Claude or GPT and the tools work identically."
@@ -262,7 +262,7 @@ generate_pipeline_config tool      inspects source table schema, fills a conform
 Agent orchestrates the flow        NL description → generate → validate → return to user
 ```
 
-**What this mirrors at UTR:**
+**What this enables:**
 > "Instead of engineers writing custom Spark jobs per use case, they describe what they need and the framework generates a config that's validated against a contract. The agent is the bridge between natural language intent and the config-driven framework."
 
 ---
