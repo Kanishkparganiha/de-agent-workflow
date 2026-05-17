@@ -15,7 +15,7 @@ from tools.schema_tool import handle_list_tables
 from tools.quality_tool import handle_data_quality
 from tools.pipeline_tool import handle_validate_config, handle_generate_config
 
-app = Server("de-copilot")
+app = Server("de-agent-workflow")
 
 
 @app.list_tools()

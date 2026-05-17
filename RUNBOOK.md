@@ -1,4 +1,4 @@
-# DE Copilot — System Design Runbook
+# de-agent-workflow — System Design Runbook
 
 ---
 
@@ -42,7 +42,7 @@ flowchart TD
 ```mermaid
 flowchart LR
     subgraph Client["MCP Client (any)"]
-        A1["DE Copilot Agent"]
+        A1["de-agent-workflow Agent"]
         A2["Claude Desktop"]
         A3["Cursor / VS Code"]
     end
@@ -144,7 +144,7 @@ flowchart TD
 ## File Structure
 
 ```
-de-copilot/
+de-agent-workflow/
 ├── main.py                          ← CLI entry point
 ├── agent/
 │   ├── agent.py                     ← Agentic loop (ReAct pattern)
@@ -163,7 +163,7 @@ de-copilot/
 │   └── example_pipeline.yaml        ← Working example config
 └── data/
     ├── seed.sql                     ← Table CREATE statements
-    └── de_copilot.db                ← SQLite DB (auto-created, mimics Redshift)
+    └── de_agent_workflow.db                ← SQLite DB (auto-created, mimics Redshift)
 ```
 
 ---
@@ -187,7 +187,7 @@ Tools  [mcp_server/tools/]
   - Execute against SQLite (same query patterns as Redshift)
   - Return structured JSON results
         ↓
-SQLite DB  [data/de_copilot.db]
+SQLite DB  [data/de_agent_workflow.db]
   - site_metrics: 300 rows (10 sites × 30 days), delivery rates, package counts
   - labor_events: 300 rows, headcount vs planned — ~5% intentional nulls for DQ demo
   - pipeline_runs: 50 rows, mix of SUCCESS/FAILED/RUNNING
@@ -270,7 +270,7 @@ Agent orchestrates the flow        NL description → generate → validate → 
 ## The 3 Demo Commands
 
 ```bash
-cd /Users/kanishk/Downloads/WorkingDir/de-copilot
+cd /Users/kanishk/Downloads/WorkingDir/de-agent-workflow
 source venv/bin/activate
 
 python main.py "what tables do we have and which ones have data quality issues?"

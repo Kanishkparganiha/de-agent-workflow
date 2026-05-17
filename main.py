@@ -17,7 +17,7 @@ DEMO_QUERIES = [
 
 def main():
     if len(sys.argv) < 2:
-        print("DE Copilot — Agentic Data Engineering Assistant")
+        print("de-agent-workflow — Agentic Data Engineering Assistant")
         print("=" * 50)
         print("\nUsage:  python main.py \"your question here\"")
         print("\nTry:")

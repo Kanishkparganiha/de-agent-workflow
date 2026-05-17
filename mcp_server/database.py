@@ -4,7 +4,7 @@ import random
 import uuid
 from datetime import date, timedelta, datetime
 
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data', 'de_copilot.db')
+DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data', 'de_agent_workflow.db')
 
 SITES = ['SEA1', 'SEA2', 'PDX1', 'LAX1', 'LAX2', 'SFO1', 'DEN1', 'CHI1', 'JFK1', 'BOS1']
 
