@@ -126,15 +126,15 @@ git clone https://github.com/Kanishkparganiha/de-agent-workflow.git
 cd de-agent-workflow
 
 # 2. Install dependencies
-python -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
+python3 -m venv venv && source venv/bin/activate
+python3 -m pip install -r requirements.txt
 
 # 3. Pull a local model
 ollama pull llama3.2:3b        # lightweight, runs on CPU
 # ollama pull qwen2.5:7b       # better reasoning, recommended if you have the RAM
 
 # 4. Run
-python main.py "what tables do we have and which ones have data quality issues?"
+python3 main.py "what tables do we have and which ones have data quality issues?"
 ```
 
 The SQLite database is created and seeded automatically on first run.
