@@ -2,6 +2,7 @@ import asyncio
 import json
 import os
 import re
+import sys
 
 from openai import OpenAI
 from mcp import ClientSession, StdioServerParameters
@@ -93,7 +94,7 @@ async def run_agent(user_message: str) -> str:
         "mcp_server", "server.py",
     )
 
-    async with stdio_client(StdioServerParameters(command="python", args=[server_path])) as (read, write):
+    async with stdio_client(StdioServerParameters(command=sys.executable, args=[server_path])) as (read, write):
         async with ClientSession(read, write) as session:
             await session.initialize()
 
